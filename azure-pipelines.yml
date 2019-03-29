@@ -22,9 +22,9 @@ steps:
   displayName: Add conda to PATH
 
 - bash: |
-  create --yes --quiet --name buildEnv
-  source activate buildEnv
-  conda install --yes --name buildEnv conda-build
+    create --yes --quiet --name buildEnv
+    source activate buildEnv
+    conda install --yes --name buildEnv conda-build
   displayName: Install conda-build
 
 - bash: conda build -c conda-forge/label/cf201901 -c fermi Fermitools-conda
