@@ -22,7 +22,7 @@ steps:
   displayName: Add conda to PATH
 
 - bash: |
-    create --yes --quiet --name buildEnv
+    conda create --yes --name buildEnv
     source activate buildEnv
     conda install --yes --name buildEnv conda-build
   displayName: Install conda-build
