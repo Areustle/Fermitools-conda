@@ -26,7 +26,8 @@ steps:
 
 - bash: |
     source activate buildEnv
-    conda build -c conda-forge/label/cf201901 -c fermi Fermitools-conda
+    ls -lah
+    conda build -c conda-forge/label/cf201901 -c fermi .
   displayName: Build tools
 
 - bash: conda create -n fermi -c conda-forge/label/cf201901 -c fermi --use-local fermitools fermitools-test-scripts -y
