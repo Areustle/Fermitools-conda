@@ -7,13 +7,25 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'macOS-10.13'
 
 steps:
-- script: echo Hello, world!
+- bash: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: |
+- bash: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- bash: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- bash: conda install --yes -c fermi fermi-repoman
+  displayName: Install fermi-repoman
+
+- bash: conda build -c conda-forge/label/cf201901 -c fermi Fermitools-conda
+  displayName: Build tools
+
+- bash: conda create -n fermi -c conda-forge/label/cf201901 -c fermi --use-local fermitools fermitools-test-scripts -y
+  displayName: Test tools
