@@ -21,13 +21,13 @@ steps:
 - bash: echo "##vso[task.prependpath]$CONDA/bin"
   displayName: Add conda to PATH
 
-- bash: conda create --yes --name buildEnv conda-build
+- bash: conda create --yes --name buildEnv python=2.7 conda-build
   displayName: Prepare Build Environment
 
 - bash: |
     source activate buildEnv
     ls -lah
-    conda build -c conda-forge/label/cf201901 -c fermi .
+    conda build --python=2.7 -c conda-forge/label/cf201901 -c fermi .
   displayName: Build tools
 
 - bash: conda create -n fermi -c conda-forge/label/cf201901 -c fermi --use-local fermitools fermitools-test-scripts -y
